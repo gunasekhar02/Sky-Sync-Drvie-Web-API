@@ -19,10 +19,10 @@ namespace Sky_Sync_Drvie_Web_API.Services
         {
             var user = new User
             {
-                Email = signupUser.Email,
-                FirstName = signupUser.FirstName,
-                LastName = signupUser.LastName,
-                Password = BCrypt.Net.BCrypt.HashPassword(signupUser.Password) // Hash password
+                Email = signupUser.email,
+                FirstName = signupUser.firstName,
+                LastName = signupUser.lastName,
+                Password = BCrypt.Net.BCrypt.HashPassword(signupUser.password) // Hash password
             };
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
@@ -31,8 +31,8 @@ namespace Sky_Sync_Drvie_Web_API.Services
 
         public async Task<User> AuthenticateUser(LoginRequestDto loginUser)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == loginUser.Email);
-            if (user == null || !BCrypt.Net.BCrypt.Verify(loginUser.Password, user.Password))
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == loginUser.email);
+            if (user == null || !BCrypt.Net.BCrypt.Verify(loginUser.password, user.Password))
                 return null;
 
             return user;
