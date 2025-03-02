@@ -25,7 +25,7 @@ namespace Sky_Sync_Drvie_Web_API.Controllers
         public async Task<IActionResult> Signup(SignupRequestDto signupUser)
         {
             var user = await _userService.RegisterUser(signupUser);
-            return Ok(new { user.Id, signupUser.Email });
+            return Ok(new { user.Id, signupUser.email });
         }
 
         [HttpPost("login")]
